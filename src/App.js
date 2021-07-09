@@ -1,13 +1,47 @@
 import './App.css';
+import {useState, useEffect} from "react";
+import {Chart} from './components/Chart/Chart';
+import Query from "@arcgis/core/rest/support/Query";
+import {executeQueryJSON} from "@arcgis/core/rest/query/executeQueryJSON";
 
-//const FEATURE_SERVICE_URL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/Tornados_Points/FeatureServer/0";
+const FEATURE_SERVICE_URL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/Tornados_Points/FeatureServer/0";
 
 function App() {
+    
+    const [summary, setSummary] = useState([]);
+
+    useEffect(
+        () => {
+            countByYear(
+                (result)=>{
+                    setSummary(result.features.map((feature)=>feature.attributes));
+                }
+            );            
+        },
+        []
+    );
+
+    function countByYear(callBack)
+    {
+
+        var query = new Query();
+		query.where = "F_Scale > -9";
+        query.orderByFields = ["Year"];
+		query.outStatistics = {
+            statisticType: "count",
+            onStatisticField: "Year", 
+            outStatisticFieldName: "totalCount"
+        };
+		query.groupByFieldsForStatistics = ["Year"];
+        executeQueryJSON(FEATURE_SERVICE_URL, query).then(callBack);        	
+
+    }
+
   return (
       <div className="container-fluid vh-100 d-flex flex-column">
       
           <header className="row mt-4 mb-3">
-              <h1 className="h2 d-none d-md-block text-truncate">
+              <h1 className="h2 d-none d-md-block text-truncate pb-2">
               Twister Dashboard: Exploring Three Decades of Violent Storms
               </h1>
               <h1 className="h3 d-md-none">
@@ -22,6 +56,7 @@ function App() {
 
               <div className="flex-shrink-0 col col-xl-4 h-100 d-flex flex-column overflow-hidden bg-warning">
                 <h3 className="h4">Chart</h3>
+                <Chart className="flex-grow-1 overflow-auto" summary={summary}/>
               </div>
               
               <div className="col d-flex flex-column position-relative overflow-hidden bg-info">
