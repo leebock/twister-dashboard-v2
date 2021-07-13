@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import {Chart} from './components/Chart/Chart';
 import Query from "@arcgis/core/rest/support/Query";
 import {executeQueryJSON} from "@arcgis/core/rest/query/executeQueryJSON";
+import {TMap} from './components/TMap';
 
 const FEATURE_SERVICE_URL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/Tornados_Points/FeatureServer/0";
 
@@ -65,6 +66,7 @@ function App() {
               
               <div className="col d-flex flex-column position-relative overflow-hidden bg-success">
                 <h3 className="h4">Map</h3>
+                <TMap className="flex-grow-1"/>
               </div>
               
           </div>
