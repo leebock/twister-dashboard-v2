@@ -10,6 +10,7 @@ const FEATURE_SERVICE_URL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/
 function App() {
     
     const [summary, setSummary] = useState([]);
+    const [selected, setSelected] = useState(null);    
 
     useEffect(
         () => {
@@ -37,6 +38,10 @@ function App() {
         executeQueryJSON(FEATURE_SERVICE_URL, query).then(callBack);        	
 
     }
+    
+    const selectRecord = (year) => {
+        setSelected(summary.filter((record)=>record.Year===year).shift());
+    };    
 
   return (
       <div className="container-fluid vh-100 d-flex flex-column">
@@ -57,7 +62,10 @@ function App() {
 
               <div className="flex-shrink-0 col col-xl-4 h-100 d-flex flex-column overflow-hidden bg-warning">
                 <h3 className="h4">Chart</h3>
-                <Chart className="flex-grow-1 overflow-auto" summary={summary}/>
+                <Chart className="flex-grow-1 overflow-auto list-group" 
+                        summary={summary}
+                        selected={selected}
+                        onSelect={selectRecord}/>
               </div>
               
               <div className="col d-flex flex-column position-relative overflow-hidden bg-info">
