@@ -1,20 +1,23 @@
-export const Chart = ({totals, className, selected, onSelect: reportSelected}) => {
+export const Chart = ({totals, className, activeYear, onSelect: reportYear}) => {
     const handleButtonClick = (event) => {
-        reportSelected(event.target.textContent.split(":").shift().trim());
+        reportYear(parseInt(event.target.textContent.split(":").shift().trim()));
     }
     return (
         <div className={className}>
         {
             totals.map(
-                (item)=>
-                <button className={
+                (item)=>{
+                    return (
+                        <button className={
                             "list-group-item list-group-item-action"+
-                            (item === selected ? " active" : "")
+                            (item.Year === activeYear ? " active" : "")
                         } 
                         key={item.Year}
                         onClick={handleButtonClick}>
                         {item.Year}: {item.totalCount}
                         </button>
+                    )
+                }
             )
         }
         </div>    
