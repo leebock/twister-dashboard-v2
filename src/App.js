@@ -1,71 +1,33 @@
 import './App.css';
 import {useState, useEffect} from "react";
 import {Chart} from './components/Chart/Chart';
-import Query from "@arcgis/core/rest/support/Query";
-import {executeQueryJSON} from "@arcgis/core/rest/query/executeQueryJSON";
 import {TMap} from './components/TMap';
-
-const FEATURE_SERVICE_URL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/Tornados_Points/FeatureServer/0";
+import { fetchTotalsByYear, fetchTwisters } from './services/QueryHelpers';
 
 function App() {
-    
-    const [totals, setTotals] = useState([]);
+
+    /* totals e.g. [{year: 1950, totalCount: 195}, ...] */
+    /* twisters e.g. [
+        {
+            OBJECTID: 1, Year: 1950, Date: 1/3/1950 12:00:00 AM,
+            F_Scale: 3, Injuries: 3, Fatalities: 0, Loss: 6,
+            Length_mi: 9.5, Width_yds: 150,
+            Starting_Lat: 38.77, Starting_Long:	-90.22, 
+            End_Lat: 38.83, End_Long: -90.03
+        }, 
+        ...] 
+    */
+
+    const [totals, setTotals] = useState([]); 
     const [activeYear, setActiveYear] = useState(1950);  
     const [twisters, setTwisters] = useState([]);
 
-    useEffect(
-        () => {
-            fetchTotalsByYear(
-                (result)=>{
-                    setTotals(
-                        result.features
-                        .map((feature)=>feature.attributes)
-                        .map((attributes)=>
-                            ({...attributes, Year: parseInt(attributes.Year)})
-                        ) /* coerce year to number */
-                    );
-                }
-            );            
-        },
-        []
-    );
+    useEffect(()=>{fetchTotalsByYear((result)=>{setTotals(result);});},[]);
 
     useEffect(
-        () => {
-            fetchTwisters(
-                activeYear,
-                (result)=>{
-                    setTwisters(result.features);
-                }
-            )            
-        },
+        () => {fetchTwisters(activeYear,(result)=>{setTwisters(result);})},
         [activeYear]
     );
-
-    function fetchTotalsByYear(callBack)
-    {
-
-        var query = new Query();
-		query.where = "F_Scale > -9";
-        query.orderByFields = ["Year"];
-		query.outStatistics = {
-            statisticType: "count",
-            onStatisticField: "Year", 
-            outStatisticFieldName: "totalCount"
-        };
-		query.groupByFieldsForStatistics = ["Year"];
-        executeQueryJSON(FEATURE_SERVICE_URL, query).then(callBack);        	
-
-    }
-    
-    function fetchTwisters(year, callBack)
-    {
-        var query = new Query();
-		query.where = "F_Scale > -9 and Year = "+year;
-        query.outFields = ["*"];
-        query.returnGeometry = true;
-        executeQueryJSON(FEATURE_SERVICE_URL, query).then(callBack);        	
-    }
     
     return (
         <div className="container-fluid vh-100 d-flex flex-column">
