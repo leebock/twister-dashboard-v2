@@ -52,6 +52,7 @@ export function fetchTwisters(year, callBack)
 {
     var query = new Query();
     query.where = "F_Scale > -9 and Year = "+year;
+    query.orderByFields = ["F_Scale"];
     query.outFields = [
         "OBJECTID", "Year", "Date", 
         "F_Scale", "Injuries", "Fatalities", "Loss", 

@@ -29,9 +29,20 @@ export const TMap = ({className, twisters}) => {
             console.log("map::populating layer");
             _layerTwisters.current.removeAll();
             twisters.forEach((item, i) => {
+                const scale = item.attributes.F_Scale;
+                const size = [20,27,30,36,42,48][scale]*0.75;
                 _layerTwisters.current.add(
-                    new Graphic({geometry: new Point(item.geometry.x, item.geometry.y)})
+                    new Graphic({
+                        geometry: new Point(item.geometry.x, item.geometry.y),
+                        symbol: {
+                            type: "picture-marker",
+                            url: "Tornado_"+scale+"a.png",
+                            width: size+"px",
+                            height: size+"px"
+                        }
+                    })
                 );
+
             });
             return () => {};
         },
