@@ -2,6 +2,7 @@ import './App.css';
 import {useState, useEffect} from "react";
 import {Chart} from './components/Chart/Chart';
 import {TMap} from './components/TMap';
+import {Summary} from "./components/Summary";
 import { fetchTotalsByYear, fetchTwisters } from './services/QueryHelpers';
 
 function App() {
@@ -55,10 +56,7 @@ function App() {
                 </div>
                 
                 <div className="col d-flex flex-column position-relative overflow-hidden bg-info">
-                <h3 className="h4">Numbers</h3>
-                {activeYear && <div>Year: <strong>{activeYear}</strong></div>}
-                {activeYear && totals.length && <div>Count: <strong>{totals.filter((item)=>item.Year===activeYear).shift().totalCount}</strong></div>}
-                {activeYear && <div>Check: <strong>{twisters.length}</strong></div>}
+                    <Summary summary={totals.filter((item)=>item.Year===activeYear).shift()} twisters={twisters}/>
                 </div>
                 
                 <div className="col d-flex flex-column position-relative overflow-hidden bg-success">

@@ -9,11 +9,28 @@ export function fetchTotalsByYear(callBack)
     var query = new Query();
     query.where = "F_Scale > -9";
     query.orderByFields = ["Year"];
-    query.outStatistics = {
-        statisticType: "count",
-        onStatisticField: "Year", 
-        outStatisticFieldName: "totalCount"
-    };
+    query.outStatistics = [
+        {
+            statisticType: "count",
+            onStatisticField: "Year", 
+            outStatisticFieldName: "totalCount"
+        },
+        {
+            statisticType: "sum",
+            onStatisticField: "Injuries", 
+            outStatisticFieldName: "totalInjuries"
+        },
+        {
+            statisticType: "sum",
+            onStatisticField: "Fatalities", 
+            outStatisticFieldName: "totalFatalities"
+        },
+        {
+            statisticType: "sum",
+            onStatisticField: "Loss", 
+            outStatisticFieldName: "totalLoss"
+        }
+    ];
     query.groupByFieldsForStatistics = ["Year"];
 
     executeQueryJSON(FEATURE_SERVICE_URL, query)
