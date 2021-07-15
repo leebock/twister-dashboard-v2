@@ -22,6 +22,7 @@ function App() {
     const [totals, setTotals] = useState([]); 
     const [activeYear, setActiveYear] = useState(1950);  
     const [twisters, setTwisters] = useState([]);
+    const [selectedTwister, setSelectedTwister] = useState([]);
 
     useEffect(()=>{fetchTotalsByYear((result)=>{setTotals(result);});},[]);
 
@@ -30,6 +31,12 @@ function App() {
         [activeYear]
     );
     
+    const selectTwister = (attributes) => {
+        setSelectedTwister(
+            twisters.filter((feature)=>feature.attributes === attributes).shift()
+        )
+    }
+
     return (
         <div className="container-fluid vh-100 d-flex flex-column">
         
@@ -57,11 +64,12 @@ function App() {
                 
                 <div className="col d-flex flex-column position-relative overflow-hidden bg-info">
                     <Summary summary={totals.filter((item)=>item.Year===activeYear).shift()} twisters={twisters}/>
+                    {selectedTwister && selectedTwister.attributes && <h5>{selectedTwister.attributes.F_Scale}</h5>}
                 </div>
                 
                 <div className="col d-flex flex-column position-relative overflow-hidden bg-success">
                 <h3 className="h4">Map</h3>
-                <TMap className="flex-grow-1" twisters={twisters}/>
+                <TMap className="flex-grow-1" twisters={twisters} onSelectTwister={selectTwister}/>
                 </div>
                 
             </div>
