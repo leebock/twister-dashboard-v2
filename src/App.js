@@ -9,15 +9,15 @@ const FEATURE_SERVICE_URL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/
 
 function App() {
     
-    const [summary, setSummary] = useState([]);
+    const [totals, setTotals] = useState([]);
     const [selected, setSelected] = useState(null);  
     const [twisters, setTwisters] = useState([]);
 
     useEffect(
         () => {
-            countByYear(
+            fetchTotalsByYear(
                 (result)=>{
-                    setSummary(result.features.map((feature)=>feature.attributes));
+                    setTotals(result.features.map((feature)=>feature.attributes));
                 }
             );            
         },
@@ -38,7 +38,7 @@ function App() {
         [selected]
     );
 
-    function countByYear(callBack)
+    function fetchTotalsByYear(callBack)
     {
 
         var query = new Query();
@@ -64,7 +64,7 @@ function App() {
     }
     
     const selectRecord = (year) => {
-        setSelected(summary.filter((record)=>record.Year===year).shift());
+        setSelected(totals.filter((record)=>record.Year===year).shift());
     };    
 
   return (
@@ -87,7 +87,7 @@ function App() {
               <div className="flex-shrink-0 col col-xl-4 h-100 d-flex flex-column overflow-hidden bg-warning">
                 <h3 className="h4">Chart</h3>
                 <Chart className="flex-grow-1 overflow-auto list-group" 
-                        summary={summary}
+                        totals={totals}
                         selected={selected}
                         onSelect={selectRecord}/>
               </div>
