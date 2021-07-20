@@ -11,8 +11,7 @@ export const Summary = ({className, summary, twisters}) => {
     );
     return (
         <div className={className}>
-            <h3 className="h4">Summary</h3>
-            <div>Year:<strong>{year}</strong></div>
+            <h3 className="h4">Year: {year}</h3>
             <table className="table">
                 <thead>
                     <tr>
