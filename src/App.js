@@ -54,22 +54,22 @@ function App() {
             
             <div className="row flex-grow-1 d-flex flex-column flex-md-row overflow-hidden">
 
-                <div className="flex-shrink-0 col col-xl-4 h-100 d-flex flex-column overflow-hidden bg-warning">
-                <h3 className="h4">Chart</h3>
-                <Chart className="flex-grow-1 overflow-auto list-group" 
-                        totals={totals}
-                        activeYear={activeYear}
-                        onSelect={(year)=>{setActiveYear(year)}}/>
+                <div className="flex-shrink-0 col col-xl-4 h-100 d-flex flex-column overflow-hidden bg-warning pb-2">
+                    <h3 className="h4">Chart</h3>
+                    <Chart className="flex-grow-1 list-group overflow-hidden" 
+                            totals={totals}
+                            activeYear={activeYear}
+                            onSelect={(year)=>{setActiveYear(year)}}/>
                 </div>
                 
-                <div className="col d-flex flex-column position-relative overflow-hidden bg-info">
+                <div className="col d-flex flex-column position-relative overflow-hidden bg-info pb-2">
                     <Summary summary={totals.filter((item)=>item.Year===activeYear).shift()} twisters={twisters}/>
                     {selectedTwister && selectedTwister.attributes && <h5>{selectedTwister.attributes.F_Scale}</h5>}
                 </div>
                 
-                <div className="col d-flex flex-column position-relative overflow-hidden bg-success">
-                <h3 className="h4">Map</h3>
-                <TMap className="flex-grow-1" twisters={twisters} onSelectTwister={selectTwister}/>
+                <div className="col d-flex flex-column position-relative overflow-hidden bg-success pb-2">
+                    <h3 className="h4">Map</h3>
+                    <TMap className="flex-grow-1" twisters={twisters} onSelectTwister={selectTwister}/>
                 </div>
                 
             </div>
