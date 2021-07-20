@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import {Chart} from './components/Chart/Chart';
 import {TMap} from './components/TMap';
 import {Summary} from "./components/Summary";
+import {Details} from './components/Details';
 import { fetchTotalsByYear, fetchTwisters } from './services/QueryHelpers';
 
 function App() {
@@ -63,7 +64,7 @@ function App() {
                 
                 <div className="col d-flex flex-column position-relative overflow-hidden bg-info pb-2">
                     <Summary summary={totals.filter((item)=>item.Year===activeYear).shift()} twisters={twisters}/>
-                    {selectedTwister &&  <h5>{selectedTwister.F_Scale}</h5>}
+                    {selectedTwister && <Details twister={selectedTwister}/>}
                 </div>
                 
                 <div className="col d-flex flex-column position-relative overflow-hidden bg-success pb-2">
