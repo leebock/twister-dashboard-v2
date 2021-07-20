@@ -22,12 +22,15 @@ function App() {
     const [totals, setTotals] = useState([]); 
     const [activeYear, setActiveYear] = useState(1950);  
     const [twisters, setTwisters] = useState([]);
-    const [selectedTwister, setSelectedTwister] = useState([]);
+    const [selectedTwister, setSelectedTwister] = useState(null);
 
     useEffect(()=>{fetchTotalsByYear((result)=>{setTotals(result);});},[]);
 
     useEffect(
-        () => {fetchTwisters(activeYear,(result)=>{setTwisters(result);})},
+        () => {
+            setSelectedTwister(null);
+            fetchTwisters(activeYear,(result)=>{setTwisters(result);})
+        },
         [activeYear]
     );
     
