@@ -99,9 +99,9 @@ export const TMap = ({className, twisters, onSelectTwister:reportSelected}) => {
             twisters.forEach((item, i) => {
                 _layerTwisters.current.add(
                     new Graphic({
-                        geometry: new Point(item.geometry.x, item.geometry.y),
-                        symbol: createSymbol(item.attributes.F_Scale),
-                        attributes: item.attributes
+                        geometry: new Point(item.Starting_Long, item.Starting_Lat),
+                        symbol: createSymbol(item.F_Scale),
+                        attributes: item
                     })
                 );
             });

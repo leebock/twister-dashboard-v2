@@ -1,13 +1,12 @@
 export const Summary = ({className, summary, twisters}) => {
-    const records = twisters.map((twister)=>twister.attributes);
-    const year = records.length ? records[0].Year : "";
-    const totalInjuries = records.reduce(
+    const year = twisters.length ? twisters[0].Year : "";
+    const totalInjuries = twisters.reduce(
         (accumulator, current)=>accumulator+current.Injuries, 0
     );
-    const totalFatalities = records.reduce(
+    const totalFatalities = twisters.reduce(
         (accumulator, current)=>accumulator+current.Fatalities, 0
     );
-    const totalPropertyLoss = records.reduce(
+    const totalPropertyLoss = twisters.reduce(
         (accumulator, current)=>accumulator+current.Loss, 0
     );
     return (
@@ -25,7 +24,7 @@ export const Summary = ({className, summary, twisters}) => {
                 <tbody>
                     <tr>
                         <td>Total Tornadoes:</td>
-                        <td>{records.length.toLocaleString()}</td>
+                        <td>{twisters.length.toLocaleString()}</td>
                         <td>{summary && summary.totalCount.toLocaleString()}</td>
                     </tr>
                     <tr>

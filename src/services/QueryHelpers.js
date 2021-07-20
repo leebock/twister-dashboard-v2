@@ -60,11 +60,11 @@ export function fetchTwisters(year, callBack)
         "End_Lat", "End_Long", 
         "Length_mi", "Width_yds"
     ];
-    query.returnGeometry = true;
+    query.returnGeometry = false;
     executeQueryJSON(FEATURE_SERVICE_URL, query)
         .then(
             (result)=>{
-                callBack(result.features);
+                callBack(result.features.map((feature)=>feature.attributes));
             }
         );        	
 }

@@ -31,11 +31,7 @@ function App() {
         [activeYear]
     );
     
-    const selectTwister = (attributes) => {
-        setSelectedTwister(
-            twisters.filter((feature)=>feature.attributes === attributes).shift()
-        )
-    }
+    const selectTwister = (twister) => {setSelectedTwister(twister);}
 
     return (
         <div className="container-fluid vh-100 d-flex flex-column">
@@ -64,7 +60,7 @@ function App() {
                 
                 <div className="col d-flex flex-column position-relative overflow-hidden bg-info pb-2">
                     <Summary summary={totals.filter((item)=>item.Year===activeYear).shift()} twisters={twisters}/>
-                    {selectedTwister && selectedTwister.attributes && <h5>{selectedTwister.attributes.F_Scale}</h5>}
+                    {selectedTwister &&  <h5>{selectedTwister.F_Scale}</h5>}
                 </div>
                 
                 <div className="col d-flex flex-column position-relative overflow-hidden bg-success pb-2">
