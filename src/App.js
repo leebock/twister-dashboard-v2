@@ -62,12 +62,16 @@ function App() {
                             onSelect={(year)=>{setActiveYear(year)}}/>
                 </div>
                 
-                <div className="col d-flex flex-column position-relative overflow-hidden bg-info pb-2">
-                    <Summary summary={totals.filter((item)=>item.Year===activeYear).shift()} twisters={twisters}/>
-                    {selectedTwister && <Details twister={selectedTwister}/>}
+                <div className="col h-100 d-flex flex-column overflow-hidden bg-info pb-2">
+                    <Summary className="flex-1 bg-danger" 
+                            summary={totals.filter((item)=>item.Year===activeYear).shift()} twisters={twisters}/>
+                    {
+                        selectedTwister && 
+                        <Details className="flex-1 bg-danger" twister={selectedTwister}/>
+                    }
                 </div>
                 
-                <div className="col d-flex flex-column position-relative overflow-hidden bg-success pb-2">
+                <div className="col h-100 d-flex flex-column overflow-hidden bg-success pb-2">
                     <h3 className="h4">Map</h3>
                     <TMap className="flex-grow-1" twisters={twisters} onSelectTwister={selectTwister}/>
                 </div>
