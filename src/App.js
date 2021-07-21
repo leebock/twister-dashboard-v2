@@ -21,7 +21,7 @@ function App() {
     */
 
     const [totals, setTotals] = useState([]); 
-    const [activeYear, setActiveYear] = useState(1950);  
+    const [activeYear, setActiveYear] = useState(1970);  
     const [twisters, setTwisters] = useState([]);
     const [selectedTwister, setSelectedTwister] = useState(null);
 
