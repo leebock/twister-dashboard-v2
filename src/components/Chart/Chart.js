@@ -18,7 +18,7 @@ export const Chart = ({totals, className, activeYear, onSelect: reportYear}) => 
                 (item, index)=>{
                     return (
                         <button className={
-                            "overflow-hidden flex-1 list-group-item list-group-item-action d-flex pt-0 pb-0 pt-lg-1 pb-lg-1 align-items-center"+
+                            "overflow-hidden flex-1 list-group-item list-group-item-action d-flex pt-0 pb-0 align-items-center"+
                             (item.Year === activeYear ? " active" : "")
                             }
                             key={item.Year}
