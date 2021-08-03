@@ -28,7 +28,7 @@ export const Chart = ({totals, className, activeYear, onSelect: reportYear}) => 
                             </div>
                             <div className="flex-grow-1 d-flex h-100">
                                 <div className="bg-info ps-1 p-0 d-flex align-items-center justify-content-end" 
-                                    style={{"flexBasis": ((item.totalCount/max)*100)+"%"}}>
+                                    style={{"flexBasis": max ? ((item.totalCount/max)*100)+"%" : "0%"}}>
                                     <small>{item.totalCount}</small>
                                 </div>
                             </div>                            
