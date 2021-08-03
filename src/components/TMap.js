@@ -19,9 +19,9 @@ export const TMap = ({
     const _layerHighlight = React.useRef(new GraphicsLayer());
     const _layerPinned = React.useRef(new GraphicsLayer());
     const _selected = React.useRef(null);
-    const _reportSelected = React.useRef(null);
-    const _reportExtent = React.useRef(null);
-
+    const _reportSelected = React.useRef(reportSelected);
+    const _reportExtent = React.useRef(reportExtent);
+ 
     useEffect(
         () => {
 
@@ -133,15 +133,7 @@ export const TMap = ({
         },
         [twisters]
     );
-    
-    useEffect(
-        ()=> {
-            _reportSelected.current = reportSelected;
-            _reportExtent.current = reportExtent;
-        },
-        [reportSelected, reportExtent]
-    )
-
+ 
     const createHighlight = (graphic) =>
     {
         const clone = graphic.clone();
