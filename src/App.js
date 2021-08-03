@@ -55,7 +55,7 @@ function App() {
     return (
         <div className="container-fluid vh-100 d-flex flex-column">
         
-            <header className="row mt-4 mb-3">
+            <header className="row mt-4 mb-3 flex-shrink-0">
                 <h1 className="h2 d-none d-md-block text-truncate pb-2">
                 Twister Dashboard: Exploring Three Decades of Violent Storms
                 </h1>
@@ -94,7 +94,7 @@ function App() {
                 
             </div>
             
-            <footer className="row mt-3 mb-5 mb-md-3">
+            <footer className="row mt-3 mb-5 mb-md-3 flex-shrink-0">
                 <small className="text-muted">This is the footer.</small>
             </footer>
 
