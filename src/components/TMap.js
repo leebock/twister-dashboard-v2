@@ -5,14 +5,22 @@ import Extent from "@arcgis/core/geometry/Extent";
 import Point from "@arcgis/core/geometry/Point";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import Graphic from "@arcgis/core/Graphic";
+import { whenTrue } from "@arcgis/core/core/watchUtils";
+import { webMercatorToGeographic } from "@arcgis/core/geometry/support/webMercatorUtils";
 
-export const TMap = ({className, twisters, onSelectTwister:reportSelected}) => {
+export const TMap = ({
+    className, 
+    twisters, 
+    onSelectTwister:reportSelected, 
+    onExtentChange:reportExtent
+    }) => {
 
     const _layerTwisters = React.useRef(new GraphicsLayer());
     const _layerHighlight = React.useRef(new GraphicsLayer());
     const _layerPinned = React.useRef(new GraphicsLayer());
     const _selected = React.useRef(null);
     const _reportSelected = React.useRef(null);
+    const _reportExtent = React.useRef(null);
 
     useEffect(
         () => {
@@ -29,6 +37,22 @@ export const TMap = ({className, twisters, onSelectTwister:reportSelected}) => {
                     map: map, 
                     container: "map", 
                     extent: new Extent({xmin: -124, ymin: 24, xmax: -67, ymax:50})
+                }
+            );
+
+            view.when(
+                ()=> {
+                    whenTrue(
+                        view, 
+                        "stationary", 
+                        ()=>{
+                            _reportExtent.current(
+                                webMercatorToGeographic(view.extent)
+                                .normalize()
+                                .pop()
+                            );
+                        }
+                    )
                 }
             );
 
@@ -113,8 +137,9 @@ export const TMap = ({className, twisters, onSelectTwister:reportSelected}) => {
     useEffect(
         ()=> {
             _reportSelected.current = reportSelected;
+            _reportExtent.current = reportExtent;
         },
-        [reportSelected]
+        [reportSelected, reportExtent]
     )
 
     const createHighlight = (graphic) =>

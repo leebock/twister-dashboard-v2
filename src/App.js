@@ -24,8 +24,14 @@ function App() {
     const [activeYear, setActiveYear] = useState(1970);  
     const [twisters, setTwisters] = useState([]);
     const [selectedTwister, setSelectedTwister] = useState(null);
+    const [extentFilter, setExtentFilter] = useState(null);
 
-    useEffect(()=>{fetchTotalsByYear((result)=>{setTotals(result);});},[]);
+    useEffect(
+        ()=> {
+            fetchTotalsByYear(extentFilter, (result)=>{setTotals(result);});
+        },
+        [extentFilter]
+    );
 
     useEffect(
         () => {
@@ -36,6 +42,7 @@ function App() {
     );
     
     const selectTwister = (twister) => {setSelectedTwister(twister);}
+    const processExtent = (extent)=>{setExtentFilter(extent);}
 
     return (
         <div className="container-fluid vh-100 d-flex flex-column">
@@ -71,7 +78,10 @@ function App() {
                 </div>
                 
                 <div className="col h-100 d-flex flex-column overflow-hidden bg-success pt-2 pb-2">
-                    <TMap className="flex-grow-1" twisters={twisters} onSelectTwister={selectTwister}/>
+                    <TMap className="flex-grow-1" 
+                        twisters={twisters} 
+                        onSelectTwister={selectTwister}
+                        onExtentChange={processExtent}/>
                 </div>
                 
             </div>
