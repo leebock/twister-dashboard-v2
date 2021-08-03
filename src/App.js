@@ -26,9 +26,17 @@ function App() {
     const [selectedTwister, setSelectedTwister] = useState(null);
     const [extentFilter, setExtentFilter] = useState(null);
 
+    const MIN_YEAR = 1970;
+    const MAX_YEAR = 2012;
+
     useEffect(
         ()=> {
-            fetchTotalsByYear(extentFilter, (result)=>{setTotals(result);});
+            fetchTotalsByYear(
+                MIN_YEAR, 
+                MAX_YEAR, 
+                extentFilter, 
+                (result)=>{setTotals(result);}
+            );
         },
         [extentFilter]
     );
