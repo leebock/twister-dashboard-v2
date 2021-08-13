@@ -67,15 +67,15 @@ function App() {
                 </h2>
             </header>
             
-            <div className="row flex-grow-1 d-flex flex-column flex-md-row overflow-hidden">
+            <div id="main">
 
-                <div className="flex-shrink-0 col col-xl-4 h-100 d-flex overflow-hidden bg-warning pt-2 pb-2">
+                <div>
                     <Chart  totals={totals}
                             activeYear={activeYear}
                             onSelect={(year)=>{setActiveYear(year)}}/>
                 </div>
                 
-                <div className="col h-100 d-flex flex-column overflow-hidden bg-info pt-2 pb-2">
+                <div>
                     <Summary className="flex-1 bg-danger" 
                             summary={totals.filter((item)=>item.Year===activeYear).shift()} twisters={twisters}/>
                     {
@@ -84,7 +84,7 @@ function App() {
                     }
                 </div>
                 
-                <div className="col h-100 d-flex flex-column overflow-hidden bg-success pt-2 pb-2">
+                <div>
                     <TMap className="flex-grow-1" 
                         twisters={twisters} 
                         onSelectTwister={selectTwister}

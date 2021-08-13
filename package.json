@@ -2,6 +2,7 @@
   "name": "tornado-dashboard-v2",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@arcgis/core": "^4.20.2",
     "@testing-library/jest-dom": "^5.14.1",

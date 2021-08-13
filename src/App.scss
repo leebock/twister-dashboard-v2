@@ -1,3 +1,21 @@
+div#main {
+
+    display: flex;  
+    flex: 1;
+    overflow: hidden; 
+
+    & > div {
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+    }
+
+    @media  (max-width: 600px) {
+        flex-direction: column;
+    }
+         
+}
+
 div#chart {
 
     flex: 1;
