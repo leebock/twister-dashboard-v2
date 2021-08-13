@@ -12,34 +12,46 @@ export const Chart = ({totals, className, activeYear, onSelect: reportYear}) => 
         Number.MIN_SAFE_INTEGER
     );
     return (
-        <div className={className}>
-        {
-            totals.map(
-                (item, index)=>{
-                    return (
-                        <button className={
-                            "overflow-hidden flex-1 list-group-item list-group-item-action d-flex pt-0 pb-0 align-items-center"+
-                            (item.Year === activeYear ? " active" : "")
-                            }
-                            key={item.Year}
-                            onClick={handleButtonClick}>
-                            <div style={{"width":"60px"}}>
-                                <small className={"align-middle"+(index % 5 ? " d-none d-lg-block" : "d-block")}>{item.Year}</small>
-                            </div>
-                            <div className="flex-grow-1 d-flex h-100">
-                                <div className="bg-info ps-1 p-0 d-flex align-items-center justify-content-end" 
-                                    style={{
-                                        "flexBasis": max ? ((item.totalCount/max)*100)+"%" : "0%", 
-                                        "transition": "flex-basis 500ms"
-                                        }}>
-                                    <small>{item.totalCount}</small>
-                                </div>
-                            </div>                            
-                        </button>
+        <div id="chart">
+            <div id="col1">
+                {
+                    totals.map(
+                        (item, index)=>{
+                            return item.Year % 5 === 0 && 
+                            <label style={{top: ((index/totals.length)*100)+"%"}}>{item.Year}</label>
+                        }
                     )
                 }
-            )
-        }
+            </div>
+            <div id="col2" className="flex-grow-1 list-group overflow-hidden">
+                {
+                totals.map(
+                    (item, index)=>{
+                        return (
+                            <button className={
+                                "overflow-hidden flex-1 list-group-item list-group-item-action d-flex pt-0 pb-0 align-items-center"+
+                                (item.Year === activeYear ? " active" : "")
+                                }
+                                key={item.Year}
+                                onClick={handleButtonClick}>
+                                <div style={{"width":"60px"}}>
+                                    <small className="align-middle">{item.Year}</small>
+                                </div>
+                                <div className="flex-grow-1 d-flex h-100">
+                                    <div className="bg-info ps-1 p-0 d-flex align-items-center justify-content-end" 
+                                        style={{
+                                            "flexBasis": max ? ((item.totalCount/max)*100)+"%" : "0%", 
+                                            "transition": "flex-basis 500ms"
+                                            }}>
+                                        <small>{item.totalCount}</small>
+                                    </div>
+                                </div>                            
+                            </button>
+                        )
+                    }
+                )
+                }
+            </div>
         </div>    
     );
 }

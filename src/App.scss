@@ -1,0 +1,32 @@
+div#chart {
+
+    flex: 1;
+    display: flex;
+
+    & > div#col1 {
+
+        @media (min-height: 1000px) {
+            display: none;
+        }
+    
+        background-color: chartreuse;
+        width: 60px;
+        position: relative;
+
+        & > label {
+            position: absolute;
+        }
+
+    }
+
+    & > div#col2 {
+        flex: 1;
+        background-color: darksalmon;
+        button > div:nth-of-type(1) {
+            @media (max-height: 1000px) {
+                display: none;
+            }
+        }
+    }
+
+}

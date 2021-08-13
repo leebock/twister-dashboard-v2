@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import {useState, useEffect} from "react";
 import {Chart} from './components/Chart/Chart';
 import {TMap} from './components/TMap';
@@ -69,9 +69,8 @@ function App() {
             
             <div className="row flex-grow-1 d-flex flex-column flex-md-row overflow-hidden">
 
-                <div className="flex-shrink-0 col col-xl-4 h-100 d-flex flex-column overflow-hidden bg-warning pt-2 pb-2">
-                    <Chart className="flex-grow-1 list-group overflow-hidden" 
-                            totals={totals}
+                <div className="flex-shrink-0 col col-xl-4 h-100 d-flex overflow-hidden bg-warning pt-2 pb-2">
+                    <Chart  totals={totals}
                             activeYear={activeYear}
                             onSelect={(year)=>{setActiveYear(year)}}/>
                 </div>
