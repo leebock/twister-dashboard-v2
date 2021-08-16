@@ -8,6 +8,11 @@ div#main {
         flex: 1;
         display: flex;
         overflow: hidden;
+        margin-right: 7px;
+        background-color: black;
+        &:nth-of-type(3) {
+            margin-right: 0;
+        }
     }
 
     @media  (max-width: 600px) {
@@ -19,7 +24,13 @@ div#main {
 div#chart {
 
     flex: 1;
+    padding: 2px;
+    padding-right: 4px;
     display: flex;
+
+    & label {
+        color: #bababa;
+    }
 
     & > div#col1 {
 
@@ -27,8 +38,7 @@ div#chart {
             display: none;
         }
     
-        background-color: chartreuse;
-        width: 60px;
+        width: 48px;
         position: relative;
 
         & > label {
@@ -39,13 +49,69 @@ div#chart {
     }
 
     & > div#col2 {
-        flex: 1;
-        background-color: darksalmon;
-        button > div:nth-of-type(1) {
-            @media (max-height: 1000px) {
-                display: none;
+
+        justify-content: space-around;
+
+        button.list-group-item {
+
+            flex-grow: 1;
+            padding-left: 0px;
+            padding-right: 0px;
+            max-height: 24px;        
+            background: none;
+            border-color: black;
+            border-top-width: 1px;
+            
+            & > div:nth-of-type(1) {
+                width: 48px;
+                text-align: center;
+                & > label {
+                    margin-left: -3px;
+                    cursor: pointer;
+                }
+                @media (max-height: 1000px) {
+                    display: none;
+                }    
             }
+            & > div:nth-of-type(2) {
+                small {
+                    visibility: hidden;
+                }
+                & > div {
+                    background: #3f5f6a!important;
+                }
+            }
+
+            &:hover {
+                & > div:nth-of-type(1) {
+                    & > label {
+                        color: lightgray;
+                    }
+                }
+                & > div:nth-of-type(2) {
+                    & > div {
+                        background: lightgray!important;
+                    }
+                }    
+            }
+
+            &.active {
+                margin-top: 0px;
+                border-top-width: 1px;
+                background-color: initial;
+                & > div:nth-of-type(1) {
+                    & > label {
+                        color: #058eb8;
+                    }
+                }
+                & > div:nth-of-type(2) {
+                    & > div {
+                        background: #058eb8!important;
+                    }
+                }                
+            }
+
         }
     }
-
+    
 }

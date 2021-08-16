@@ -34,8 +34,8 @@ export const Chart = ({totals, className, activeYear, onSelect: reportYear}) => 
                                 }
                                 key={item.Year}
                                 onClick={handleButtonClick}>
-                                <div style={{"width":"60px"}}>
-                                    <small className="align-middle">{item.Year}</small>
+                                <div>
+                                    <label><small>{item.Year}</small></label>
                                 </div>
                                 <div className="flex-grow-1 d-flex h-100">
                                     <div className="bg-info ps-1 p-0 d-flex align-items-center justify-content-end" 
