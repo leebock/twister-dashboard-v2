@@ -18,7 +18,7 @@ export const Chart = ({totals, className, activeYear, onSelect: reportYear}) => 
                     totals.map(
                         (item, index)=>{
                             return item.Year % 5 === 0 && 
-                            <label style={{top: ((index/totals.length)*100)+"%"}}>{item.Year}</label>
+                            <label style={{top: ((index/totals.length)*100)+"%"}}><small>{item.Year}</small></label>
                         }
                     )
                 }
