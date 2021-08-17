@@ -5,12 +5,18 @@ div#main {
     overflow: hidden; 
 
     & > div {
-        flex: 1;
         display: flex;
         overflow: hidden;
         margin-right: 7px;
         background-color: black;
+        &:nth-of-type(1) {
+            flex: 1
+        }
+        &:nth-of-type(2) {
+            flex-shrink: 0;
+        }
         &:nth-of-type(3) {
+            flex: 1;
             margin-right: 0;
         }
     }
@@ -141,12 +147,25 @@ div#chart {
 div#summary {
     color: #bababa;
     padding: 20px;
+    width: 300px;
+    /*
+    @media (min-aspect-ratio: 3/4) {
+        background-color: plum;
+        width: 300px;
+    } 
+    */   
+    @media  (max-width: 600px) {
+        width: 100%;
+    }
     & > h3 {
         color: #058eb8;
         font-family:Georgia, 'Times New Roman', Times, serif;    
         font-size: 60px;
         margin-bottom: 0px;
         margin-top: -8px;
+        @media (max-height: 650px) {
+            font-size: 30px;
+        }
     }
     & > h3:nth-of-type(1) {
         margin-top: -20px;
@@ -154,10 +173,18 @@ div#summary {
     & > h3:nth-of-type(2) {
         color: #02acab;
         font-size: 80px;
+        @media (max-height: 650px) {
+            font-size: 40px;
+        }
     }
     hr {
         margin-top: 1px;
         margin-bottom: 0px;
+    }
+    & > span {
+        @media (max-height: 650px) {
+            font-size: 16px;
+        }
     }
     & > span:nth-of-type(1) {
         color: white;
