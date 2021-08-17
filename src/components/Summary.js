@@ -1,5 +1,4 @@
-export const Summary = ({className, summary, twisters}) => {
-    const year = twisters.length ? twisters[0].Year : "";
+export const Summary = ({className, year, summary}) => {
     return (
         <div id="summary" className={className}>
             {
