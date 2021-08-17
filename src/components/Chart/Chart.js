@@ -33,6 +33,7 @@ export const Chart = ({totals, className, activeYear, onSelect: reportYear}) => 
                                 (item.Year === activeYear ? " active" : "")
                                 }
                                 key={item.Year}
+                                title={item.Year+": "+item.totalCount.toLocaleString()+" tornadoes"}
                                 onClick={handleButtonClick}>
                                 <div>
                                     <label><small>{item.Year}</small></label>
