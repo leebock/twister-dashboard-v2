@@ -76,11 +76,11 @@ function App() {
                 </div>
                 
                 <div>
-                    <Summary className="flex-1 bg-danger" 
+                    <Summary className="flex-1" 
                             summary={totals.filter((item)=>item.Year===activeYear).shift()} twisters={twisters}/>
                     {
                         selectedTwister && 
-                        <Details className="flex-1 bg-danger" twister={selectedTwister}/>
+                        <Details className="flex-1" twister={selectedTwister}/>
                     }
                 </div>
                 
