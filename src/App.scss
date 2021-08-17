@@ -46,6 +46,8 @@ div#chart {
             margin-top: -7px;
         }
 
+        margin-bottom: 30px; // simulates scale div at the bottom of col2
+
     }
 
     & > div#col2 {
@@ -61,7 +63,7 @@ div#chart {
             background: none;
             border-color: black;
             border-top-width: 1px;
-            
+
             & > div:nth-of-type(1) {
                 width: 48px;
                 text-align: center;
@@ -111,6 +113,26 @@ div#chart {
                 }                
             }
 
+        } // button.list-group-item
+
+        div#scale {
+            margin-top: 7px;
+            margin-left: 49px;
+            display: flex;
+            border: 1px solid #bababa;
+            border-bottom-width: 0px;
+            height: 23px;
+            display: flex;
+            justify-content: space-between;
+            @media (max-height: 1000px) {
+                margin-left: 0px;
+            }
+            & > label:nth-of-type(1) {
+                margin-left: 3px;
+            }
+            & > label:nth-of-type(2) {
+                margin-right: 3px;
+            }
         }
     }
     

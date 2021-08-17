@@ -52,6 +52,15 @@ export const Chart = ({totals, className, activeYear, onSelect: reportYear}) => 
                     }
                 )
                 }
+                {
+                    totals.length && 
+                    (
+                    <div id="scale">
+                        <label><small>0</small></label>
+                        <label><small>{max.toLocaleString()}</small></label>
+                    </div>
+                    )
+                }
             </div>
         </div>    
     );
