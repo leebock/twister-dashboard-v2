@@ -1,3 +1,6 @@
+$BREAKPOINT-PORTRAIT: "3/4";
+
+
 div#main {
 
     display: flex;  
@@ -7,22 +10,36 @@ div#main {
     & > div {
         display: flex;
         overflow: hidden;
-        margin-right: 7px;
         background-color: black;
         &:nth-of-type(1) {
             flex: 1;
-            max-width: 600px;
+            max-width: 1000px;
+            padding-right: 7px;
+            @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
+                max-width: none;
+                padding-right: 0px;
+                padding-bottom: 3px;
+            }
         }
         &:nth-of-type(2) {
-            flex-shrink: 0;
+            border-style: solid;
+            border-color: gray;
+            border-width: 0px;
+            border-left-width: 1px;
+            width: 300px;
+            @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
+                width: initial;
+                max-height: 20%;
+                border-left-width: 0px;
+                border-top-width: 1px;
+            }
         }
         &:nth-of-type(3) {
             flex: 1;
-            margin-right: 0;
         }
     }
 
-    @media  (max-width: 600px) {
+    @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
         flex-direction: column;
     }
          
@@ -30,9 +47,10 @@ div#main {
 
 div#chart {
 
+    $CHART-HEIGHT-BREAKPOINT: "900px";
+
     flex: 1;
     padding: 2px;
-    padding-right: 4px;
     display: flex;
 
     & label {
@@ -41,10 +59,13 @@ div#chart {
 
     & > div#col1 {
 
-        @media (min-height: 1000px) {
+        @media (min-height: $CHART-HEIGHT-BREAKPOINT) {
             display: none;
         }
-    
+        @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
+            display: block;
+        }
+
         width: 48px;
         position: relative;
 
@@ -78,9 +99,12 @@ div#chart {
                     margin-left: -3px;
                     cursor: pointer;
                 }
-                @media (max-height: 1000px) {
+                @media (max-height: $CHART-HEIGHT-BREAKPOINT) {
                     display: none;
                 }    
+                @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
+                    display: none;
+                }        
             }
             & > div:nth-of-type(2) {
                 small {
@@ -131,7 +155,10 @@ div#chart {
             height: 23px;
             display: flex;
             justify-content: space-between;
-            @media (max-height: 1000px) {
+            @media (max-height: $CHART-HEIGHT-BREAKPOINT) {
+                margin-left: 0px;
+            }
+            @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
                 margin-left: 0px;
             }
             & > label:nth-of-type(1) {
@@ -146,25 +173,19 @@ div#chart {
 } // #chart
 
 div#summary {
+    $SUMMARY-HEIGHT-BREAKPOINT: "650px";
     color: #bababa;
     padding: 20px;
-    width: 300px;
-    /*
-    @media (min-aspect-ratio: 3/4) {
-        background-color: plum;
-        width: 300px;
-    } 
-    */   
-    @media  (max-width: 600px) {
-        width: 100%;
-    }
     & > h3 {
         color: #058eb8;
         font-family:Georgia, 'Times New Roman', Times, serif;    
         font-size: 60px;
         margin-bottom: 0px;
         margin-top: -8px;
-        @media (max-height: 650px) {
+        @media (max-height: $SUMMARY-HEIGHT-BREAKPOINT) {
+            font-size: 30px;
+        }
+        @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
             font-size: 30px;
         }
     }
@@ -174,7 +195,10 @@ div#summary {
     & > h3:nth-of-type(2) {
         color: #02acab;
         font-size: 80px;
-        @media (max-height: 650px) {
+        @media (max-height: $SUMMARY-HEIGHT-BREAKPOINT) {
+            font-size: 40px;
+        }
+        @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
             font-size: 40px;
         }
     }
@@ -183,8 +207,11 @@ div#summary {
         margin-bottom: 0px;
     }
     & > span {
-        @media (max-height: 650px) {
-            font-size: 16px;
+        @media (max-height: $SUMMARY-HEIGHT-BREAKPOINT) {
+            font-size: 14px;
+        }
+        @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
+            font-size: 14px;
         }
     }
     & > span:nth-of-type(1) {
