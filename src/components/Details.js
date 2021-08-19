@@ -1,35 +1,38 @@
 export const Details = ({className, twister}) => {
+    className = twister ? className : className+" hidden";
     return (
-        <div className={className}>
-            <h3 className="h4">Twister Details</h3>
-            <table className="table">
-                <tbody>
-                    <tr>
-                        <td>Date:</td>
-                        <td>{new Date(twister.Date).toLocaleDateString()}</td>
-                    </tr>
-                    <tr>
-                        <td>Enhanced Fujita Scale:</td>
-                        <td>{twister.F_Scale}</td>
-                    </tr>
-                    <tr>
-                        <td>Length (miles):</td>
-                        <td>{twister.Length_mi}</td>
-                    </tr>
-                    <tr>
-                        <td>Injuries:</td>
-                        <td>{twister.Injuries}</td>
-                    </tr>
-                    <tr>
-                        <td>Fatalities:</td>
-                        <td>{twister.Fatalities}</td>
-                    </tr>
-                    <tr>
-                        <td>Property Loss ($millions):</td>
-                        <td>{twister.Loss}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div id="details" className={className}>
+            {
+                twister && 
+                (
+                <ul>
+                    <li>
+                        <h3 className="de-emphasized">{new Date(twister.Date).toLocaleDateString()}</h3>
+                        <span className="caption">Date</span>
+                    </li>
+                    <li>
+                        <h3 className="emphasized">{twister.F_Scale}</h3>
+                        <span className="caption">Enhanced Fujita Scale</span>
+                    </li>
+                    <li>
+                        <h3>{twister.Length_mi}</h3>
+                        <span className="caption">Length (miles)</span>
+                    </li>
+                    <li>
+                        <h3>{twister.Injuries}</h3>
+                        <span className="caption">Injuries</span>
+                    </li>
+                    <li>
+                        <h3>{twister.Fatalities}</h3>
+                        <span className="caption">Fatalities</span>
+                    </li>
+                    <li>
+                        <h3>{twister.Loss}</h3>
+                        <span className="caption">Property Loss ($millions)</span>
+                    </li>
+                </ul>
+                )
+            }
         </div>
     )
 }
