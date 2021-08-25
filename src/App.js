@@ -21,12 +21,12 @@ function App() {
     */
 
     const [totals, setTotals] = useState([]); 
-    const [activeYear, setActiveYear] = useState(1970);  
+    const [activeYear, setActiveYear] = useState(2012);  
     const [twisters, setTwisters] = useState([]);
     const [selectedTwister, setSelectedTwister] = useState(null);
     const [extentFilter, setExtentFilter] = useState(null);
 
-    const MIN_YEAR = 1970;
+    const MIN_YEAR = 1980;
     const MAX_YEAR = 2012;
 
     useEffect(
@@ -55,7 +55,7 @@ function App() {
     return (
         <div className="container-fluid vh-100 d-flex flex-column">
         
-            <header className="row mt-4 mb-3 flex-shrink-0">
+            <header className="row mb-3 flex-shrink-0">
                 <h1 className="h2 d-none d-md-block text-truncate pb-2">
                 Twister Dashboard: Exploring Three Decades of Violent Storms
                 </h1>
