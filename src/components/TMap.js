@@ -3,8 +3,10 @@ import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import Extent from "@arcgis/core/geometry/Extent";
 import Point from "@arcgis/core/geometry/Point";
+import Polyline from "@arcgis/core/geometry/Polyline";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import Graphic from "@arcgis/core/Graphic";
+import Color from "@arcgis/core/Color";
 import { whenTrue } from "@arcgis/core/core/watchUtils";
 import { webMercatorToGeographic } from "@arcgis/core/geometry/support/webMercatorUtils";
 
@@ -15,6 +17,7 @@ export const TMap = ({
     onExtentChange:reportExtent
     }) => {
 
+    const _layerPaths = React.useRef(new GraphicsLayer({minScale: 10000000}));
     const _layerTwisters = React.useRef(new GraphicsLayer());
     const _layerHighlight = React.useRef(new GraphicsLayer());
     const _layerPinned = React.useRef(new GraphicsLayer());
@@ -28,6 +31,7 @@ export const TMap = ({
             console.log("map::creating map");
 
             const map = new Map({ basemap: "gray-vector"});
+            map.add(_layerPaths.current);
             map.add(_layerTwisters.current);
             map.add(_layerHighlight.current);
             map.add(_layerPinned.current);
@@ -118,8 +122,19 @@ export const TMap = ({
         () => {
             console.log("map::populating layer");
             _layerTwisters.current.removeAll();
+            _layerPaths.current.removeAll();
             _layerHighlight.current.removeAll();
             _layerPinned.current.removeAll();
+
+            const colors = [
+                new Color("#6ed1b9"),
+                new Color("#1db3ac"),
+                new Color("#02a3ab"),
+                new Color("#0593b6"),
+                new Color("#0580af"),		
+                new Color("#035995")	
+            ];
+
             twisters.forEach((item, i) => {
                 _layerTwisters.current.add(
                     new Graphic({
@@ -128,6 +143,19 @@ export const TMap = ({
                         attributes: item
                     })
                 );
+                _layerPaths.current.add(
+                    new Graphic({
+                        geometry: new Polyline([
+                            [item.Starting_Long, item.Starting_Lat], 
+                            [item.End_Long, item.End_Lat]
+                        ]),
+                        symbol: {
+                            type: "simple-line",  // autocasts as SimpleLineSymbol()
+                            color: colors[item.F_Scale],
+                            width: item.F_Scale+1
+                        }
+                    })
+                )
             });
             return () => {};
         },
