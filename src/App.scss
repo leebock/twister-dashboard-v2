@@ -91,6 +91,7 @@ div#chart {
     & > div#col2 {
 
         justify-content: space-around;
+        border-radius: 0;
 
         button.list-group-item {
 
@@ -157,12 +158,12 @@ div#chart {
         } // button.list-group-item
 
         div#scale {
-            margin-top: 7px;
+            margin-top: 20px;
             margin-left: 49px;
             display: flex;
             border: 1px solid #bababa;
-            border-bottom-width: 0px;
-            height: 23px;
+            border-top-width: 0px;
+            height: 15px;
             display: flex;
             justify-content: space-between;
             @media (max-height: $CHART-HEIGHT-BREAKPOINT) {
@@ -170,6 +171,9 @@ div#chart {
             }
             @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
                 margin-left: 0px;
+            }
+            & > label {
+                margin-top: -16px;
             }
             & > label:nth-of-type(1) {
                 margin-left: 3px;
