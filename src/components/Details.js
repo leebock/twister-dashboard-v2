@@ -19,12 +19,12 @@ export const Details = ({className, twister}) => {
                         <span className="caption">Length (miles)</span>
                     </li>
                     <li>
-                        <h3>{twister.Injuries}</h3>
-                        <span className="caption">Injuries</span>
-                    </li>
-                    <li>
                         <h3>{twister.Fatalities}</h3>
                         <span className="caption">Fatalities</span>
+                    </li>
+                    <li>
+                        <h3>{twister.Injuries}</h3>
+                        <span className="caption">Injuries</span>
                     </li>
                     <li>
                         <h3>{twister.Loss}</h3>

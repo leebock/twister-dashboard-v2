@@ -15,14 +15,14 @@ export const Summary = ({className, year, summary}) => {
                             <span className="caption">Total tornadoes</span>
                         </li>
                         <li>
-                            <h3>{summary && summary.totalInjuries.toLocaleString()}</h3>
-                            <hr/>
-                            <span className="caption">Injuries</span> 
-                        </li>
-                        <li>
                             <h3>{summary && summary.totalFatalities.toLocaleString()}</h3>
                             <hr/>
                             <span className="caption">Fatalities</span>
+                        </li>
+                        <li>
+                            <h3>{summary && summary.totalInjuries.toLocaleString()}</h3>
+                            <hr/>
+                            <span className="caption">Injuries</span> 
                         </li>
                         <li>
                             <h3>{summary && summary.totalLoss.toLocaleString()}</h3>
