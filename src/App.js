@@ -56,10 +56,10 @@ function App() {
         <div className="container-fluid vh-100 d-flex flex-column">
         
             <header className="row mb-3 flex-shrink-0">
-                <h1 className="h2 d-none d-md-block text-truncate pb-2">
+                <h1 className="h3 d-none d-md-block text-truncate pb-2">
                 Twister Dashboard: Exploring Three Decades of Violent Storms
                 </h1>
-                <h1 className="h3 d-md-none">
+                <h1 className="h4 d-md-none">
                 Twister Dashboard
                 </h1>
                 <h2 className="h6 fw-light d-none d-md-block">
