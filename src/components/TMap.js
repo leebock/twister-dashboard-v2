@@ -9,6 +9,7 @@ import Graphic from "@arcgis/core/Graphic";
 import Color from "@arcgis/core/Color";
 import { whenTrue } from "@arcgis/core/core/watchUtils";
 import { webMercatorToGeographic } from "@arcgis/core/geometry/support/webMercatorUtils";
+import Tooltip from "./Tooltip";
 
 export const TMap = ({
     className, 
@@ -60,6 +61,10 @@ export const TMap = ({
                 }
             );
 
+            // create homemade tooltip
+
+            let toolTip = new Tooltip(view.container);            
+
             view.on(
                 "pointer-move",         
                 (event) => {
@@ -70,8 +75,20 @@ export const TMap = ({
                                 document.querySelector("#map").style.cursor = "pointer";
                                 const graphic = response.results.shift().graphic;
                                 _layerHighlight.current.add(createHighlight(graphic));
+                                const screenPoint = view.toScreen(
+                                    new Point(
+                                        graphic.attributes.Starting_Long, 
+                                        graphic.attributes.Starting_Lat
+                                    )
+                                );
+                                toolTip.show(
+                                    new Date(graphic.attributes.Date).toLocaleDateString()+
+                                    "<br>Scale: <b>"+graphic.attributes.F_Scale+"</b>", 
+                                    screenPoint.x, screenPoint.y
+                                );
                             } else {
                                 document.querySelector("#map").style.cursor = "default";
+                                toolTip.hide();
                             }
                         }
                     );        
@@ -84,6 +101,7 @@ export const TMap = ({
                     view.hitTest(event, {include: _layerTwisters.current}).then(
                         function(response) {
                             document.querySelector("#map").style.cursor = "default";
+                            toolTip.hide();
                             _layerHighlight.current.removeAll();
                             if (response.results.length === 0) {
                                 _selected.current = null;

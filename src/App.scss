@@ -323,3 +323,20 @@ div#details {
         }
     }    
 }
+  
+.map-tip {
+    line-height: 1.3em;
+    font-size: 12px;
+    padding: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    border-style: solid!important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+#map {
+    position: relative;
+}

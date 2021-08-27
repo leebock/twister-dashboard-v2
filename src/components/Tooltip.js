@@ -1,28 +1,27 @@
-function Tooltip(container)
+export default function Tooltip(container)
 {
 	this._container = container;
-	this._div = $("<div>")
-		.addClass("tooltip")
-		.css("position", "absolute")
-		.css("pointer-events", "none")
-		.css("white-space", "nowrap")
-		.css("display", "none")
-		.attr("role", "tooltip")
-		.appendTo(container);
+	this._div = document.createElement("div");
+	this._div.classList.add("map-tip");
+	this._div.style.position = "absolute";
+	this._div.style.pointerEvents = "none";
+	this._div.style.whiteSpace = "nowrap";
+	this._div.style.display = "none";
+	this._div.setAttribute("role", "tooltip");
+	this._container.appendChild(this._div);
 }
 
 Tooltip.prototype.hide = function()
 {
-	this._div.hide();	
+	this._div.style.display = "none";	
 };
 
 Tooltip.prototype.show = function(text, x, y)
 {
 	
-	this._div
-		.text(text)
-		.css("left", parseInt(x))
-		.css("top", parseInt(y));
+	this._div.innerHTML = text;
+	this._div.style.left = parseInt(x)+"px";
+	this._div.style.top = parseInt(y)+"px";
 
 	var positions = [
 		/* upper-center */
@@ -43,29 +42,35 @@ Tooltip.prototype.show = function(text, x, y)
 		{"transform":"translate(0, -50%)","margin-left":"24px","margin-top":"0px"}
 	];
 	
-	this._div.show();
+	this._div.style.display = "block";
 	
 	// move through each of the positions until one doesn't overflow 
 	// the container (or until the options run out...)
 	
 	var i = 0;
 	do {
-		this._div.css(positions[i]);
+		this._div.style.transform = positions[i].transform;
+		this._div.style.marginLeft = positions[i]["margin-left"];
+		this._div.style.marginTop = positions[i]["margin-top"];
 		i++;
 	} while (!isWithin(this._div, this._container) && i < positions.length);
 				
 	function isWithin(div, container)
 	{
 		
-		var boundaryRight = $(container).outerWidth();
+		var boundaryRight = container.offsetWidth;
 		var boundaryLeft = 0;
 		var boundaryTop = 0;
-		var boundaryBottom = $(container).outerHeight();
+		var boundaryBottom = container.offsetHeight;
 		
-		var left = parseInt(div.position().left)+parseInt(div.css("margin-left"));
-		var right = left+parseInt(div.outerWidth());
-		var spitze = parseInt(div.position().top)+parseInt(div.css("margin-top"));
-		var bottom = spitze+parseInt(div.outerHeight());
+		var left = parseInt(
+				div.getBoundingClientRect().left - container.getBoundingClientRect().left
+			)+parseInt(div.style.marginLeft);
+		var right = left+parseInt(div.offsetWidth);
+		var spitze = parseInt(
+				div.getBoundingClientRect().top - container.getBoundingClientRect().top
+			)+parseInt(div.style.marginTop);
+		var bottom = spitze+parseInt(div.offsetHeight);
 		
 		return right < boundaryRight &&
 				left > boundaryLeft && 
