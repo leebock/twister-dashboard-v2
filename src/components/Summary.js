@@ -25,7 +25,7 @@ export const Summary = ({className, year, summary}) => {
                             <span className="caption">Injuries</span> 
                         </li>
                         <li>
-                            <h3>{summary && summary.totalLoss.toLocaleString()}</h3>
+                            <h3>{summary && parseInt(summary.totalLoss).toLocaleString()}</h3>
                             <hr/>
                             <span className="caption">Property Loss ($millions)</span>        
                         </li>
