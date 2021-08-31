@@ -1,3 +1,5 @@
+import {getDisplayDate} from "../services/DateFuncs";
+
 export const Details = ({className, twister}) => {
     className = twister ? className : className+" hidden";
     return (
@@ -7,7 +9,7 @@ export const Details = ({className, twister}) => {
                 (
                 <ul>
                     <li>
-                        <h3 className="de-emphasized">{new Date(twister.Date).toLocaleDateString()}</h3>
+                        <h3 className="de-emphasized">{getDisplayDate(twister.Date)}</h3>
                         <span className="caption">Date</span>
                     </li>
                     <li>

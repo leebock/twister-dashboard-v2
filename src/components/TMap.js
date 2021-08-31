@@ -10,6 +10,7 @@ import Color from "@arcgis/core/Color";
 import { whenTrue } from "@arcgis/core/core/watchUtils";
 import { webMercatorToGeographic } from "@arcgis/core/geometry/support/webMercatorUtils";
 import Tooltip from "./Tooltip";
+import {getDisplayDate} from "../services/DateFuncs";
 
 export const TMap = ({
     className, 
@@ -82,7 +83,7 @@ export const TMap = ({
                                     )
                                 );
                                 toolTip.show(
-                                    new Date(graphic.attributes.Date).toLocaleDateString()+
+                                    getDisplayDate(graphic.attributes.Date)+
                                     "<br>Scale: <b>"+graphic.attributes.F_Scale+"</b>", 
                                     screenPoint.x, screenPoint.y
                                 );
