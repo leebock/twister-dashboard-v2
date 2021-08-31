@@ -92,7 +92,7 @@ function App() {
             </div>
             
             <footer className="row mt-3 mb-5 mb-md-3 flex-shrink-0">
-                <small className="text-muted">This is the footer.</small>
+                <small className="text-muted">Data source: <a className="text-muted" href="https://www.spc.noaa.gov/gis/svrgis/" rel="noreferrer" target="_blank">NOAA severe report database</a></small>
             </footer>
 
         </div>
