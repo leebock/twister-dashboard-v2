@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
+import Search from "@arcgis/core/widgets/Search";
+import Home from "@arcgis/core/widgets/Home";
 import Extent from "@arcgis/core/geometry/Extent";
 import Point from "@arcgis/core/geometry/Point";
 import Polyline from "@arcgis/core/geometry/Polyline";
@@ -44,6 +46,21 @@ export const TMap = ({
                     container: "map", 
                     extent: new Extent({xmin: -124, ymin: 24, xmax: -67, ymax:50})
                 }
+            );
+
+            // adds the home widget to the top left corner of the MapView
+            view.ui.add(new Home({view: view}), "top-left");            
+
+            // adds the search widget below other elements in
+            // the top left corner of the view
+            view.ui.add(
+                new Search({
+                    view: view,
+                    resultGraphicEnabled: false,
+                    popupEnabled: false,
+                    suggestionsEnabled: false
+                }), 
+                {position: "top-right"}
             );
 
             view.when(
