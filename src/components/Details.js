@@ -17,7 +17,7 @@ export const Details = ({className, twister}) => {
                         <span className="caption">Enhanced Fujita Scale</span>
                     </li>
                     <li>
-                        <h3>{twister.Length_mi}</h3>
+                        <h3>{Math.round(twister.Length_mi*10)/10}</h3>
                         <span className="caption">Length (miles)</span>
                     </li>
                     <li>
@@ -29,7 +29,7 @@ export const Details = ({className, twister}) => {
                         <span className="caption">Injuries</span>
                     </li>
                     <li>
-                        <h3>{twister.Loss}</h3>
+                        <h3>{Math.round(twister.Loss*100)/100}</h3>
                         <span className="caption">Property Loss ($millions)</span>
                     </li>
                 </ul>
