@@ -21,7 +21,7 @@ div#main {
         overflow: hidden;
         background-color: black;
         &:nth-of-type(1) {
-            flex: 1;
+            flex: 0 1 30%;
             max-width: 500px;
             padding-right: 7px;
             @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
@@ -35,7 +35,7 @@ div#main {
             border-color: gray;
             border-width: 0px;
             border-left-width: 1px;
-            width: 300px;
+            width: 250px;
             position: relative;
             @media (max-aspect-ratio: $BREAKPOINT-PORTRAIT) {
                 width: initial;
