@@ -1,46 +1,46 @@
 import Query from "@arcgis/core/rest/support/Query";
 import {executeQueryJSON} from "@arcgis/core/rest/query/executeQueryJSON";
 
-const FEATURE_SERVICE_URL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/Tornados_Points/FeatureServer/0";
+const FEATURE_SERVICE_URL = "https://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/1950_2019_torn_initpoint/FeatureServer/0";
 
 export function fetchTotalsByYear(minYear, maxYear, extent, callBack)
 {
     const years = [];
     for (var i=minYear; i<=maxYear;i++) {years.push(i);}
     var query = new Query();
-    query.where = "F_Scale > -9"+
-    " AND Year in ("+years.map((year)=>"'"+year+"'").join()+")";
+    query.where = "mag > -9"+
+    " AND yr in ("+years.map((year)=>"'"+year+"'").join()+")";
     if (extent) {
         query.where = query.where+
-        " AND Starting_Lat >= "+extent.ymin+
-        " AND Starting_Long >= "+extent.xmin+
-        " AND Starting_Lat <= "+extent.ymax+
-        " AND Starting_Long <= "+extent.xmax        
+        " AND slat >= "+extent.ymin+
+        " AND slon >= "+extent.xmin+
+        " AND slat <= "+extent.ymax+
+        " AND slon <= "+extent.xmax        
     }
-    query.orderByFields = ["Year"];
+    query.orderByFields = ["yr"];
     query.outStatistics = [
         {
             statisticType: "count",
-            onStatisticField: "Year", 
+            onStatisticField: "yr", 
             outStatisticFieldName: "totalCount"
         },
         {
             statisticType: "sum",
-            onStatisticField: "Injuries", 
+            onStatisticField: "inj", 
             outStatisticFieldName: "totalInjuries"
         },
         {
             statisticType: "sum",
-            onStatisticField: "Fatalities", 
+            onStatisticField: "fat", 
             outStatisticFieldName: "totalFatalities"
         },
         {
             statisticType: "sum",
-            onStatisticField: "Loss", 
+            onStatisticField: "loss", 
             outStatisticFieldName: "totalLoss"
         }
     ];
-    query.groupByFieldsForStatistics = ["Year"];
+    query.groupByFieldsForStatistics = ["yr"];
 
     executeQueryJSON(FEATURE_SERVICE_URL, query)
         .then(
@@ -49,7 +49,7 @@ export function fetchTotalsByYear(minYear, maxYear, extent, callBack)
                 result = result.features
                     .map((feature)=>feature.attributes)
                     .map((attributes)=>({
-                        ...attributes, Year: parseInt(attributes.Year)
+                        ...attributes, Year: parseInt(attributes.yr)
                     }));
                 // this last bit adds years for which totals are zero, since 
                 // those years dont't get returned from sql query
@@ -74,20 +74,35 @@ export function fetchTotalsByYear(minYear, maxYear, extent, callBack)
 export function fetchTwisters(year, callBack)
 {
     var query = new Query();
-    query.where = "F_Scale > -9 and Year = "+year;
-    query.orderByFields = ["F_Scale"];
-    query.outFields = [
-        "OBJECTID", "Year", "Date", 
-        "F_Scale", "Injuries", "Fatalities", "Loss", 
-        "Starting_Lat", "Starting_Long", 
-        "End_Lat", "End_Long", 
-        "Length_mi", "Width_yds"
-    ];
+    query.where = "mag > -9 and yr = "+year;
+    query.orderByFields = ["mag"];
+    query.outFields = ["*"];
     query.returnGeometry = false;
     executeQueryJSON(FEATURE_SERVICE_URL, query)
         .then(
             (result)=>{
-                callBack(result.features.map((feature)=>feature.attributes));
+                callBack(
+                    result.features.map((feature)=>convert(feature.attributes))
+                );
             }
         );        	
+}
+
+function convert(attributes)
+{
+    return {
+        OBJECTID: attributes.OBJECTID,
+        Year: attributes.yr,
+        Date: attributes.date,
+        F_Scale: attributes.mag,
+        Injuries: attributes.inj,
+        Loss: attributes.loss,
+        Starting_Lat: attributes.slat,
+        Starting_Long: attributes.slon,
+        End_Lat: attributes.elat,
+        End_Long: attributes.elon,
+        Length_mi: attributes.len,
+        Width_yds: attributes.wid
+    }
+    
 }

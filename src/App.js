@@ -21,13 +21,13 @@ function App() {
     */
 
     const [totals, setTotals] = useState([]); 
-    const [activeYear, setActiveYear] = useState(2012);  
+    const [activeYear, setActiveYear] = useState(2015);  
     const [twisters, setTwisters] = useState([]);
     const [selectedTwister, setSelectedTwister] = useState(null);
     const [extentFilter, setExtentFilter] = useState(null);
 
     const MIN_YEAR = 1980;
-    const MAX_YEAR = 2012;
+    const MAX_YEAR = 2015;
 
     useEffect(
         ()=> {
