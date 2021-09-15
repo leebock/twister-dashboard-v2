@@ -99,6 +99,7 @@ function convert(attributes)
         Year: attributes.yr,
         Date: attributes.date,
         F_Scale: attributes.mag,
+        Fatalities: attributes.fat,
         Injuries: attributes.inj,
         Loss: parseInt(attributes.yr) < 2016 ? attributes.loss : attributes.loss / 1000000,
         Starting_Lat: attributes.slat,
