@@ -21,13 +21,13 @@ function App() {
     */
 
     const [totals, setTotals] = useState([]); 
-    const [activeYear, setActiveYear] = useState(2015);  
+    const [activeYear, setActiveYear] = useState(2019);  
     const [twisters, setTwisters] = useState([]);
     const [selectedTwister, setSelectedTwister] = useState(null);
     const [extentFilter, setExtentFilter] = useState(null);
 
     const MIN_YEAR = 1980;
-    const MAX_YEAR = 2015;
+    const MAX_YEAR = 2019;
 
     useEffect(
         ()=> {
@@ -57,7 +57,7 @@ function App() {
         
             <header className="row mb-3 flex-shrink-0">
                 <h1 className="h3 d-none d-md-block text-truncate pb-2">
-                Twister Dashboard: Exploring Three Decades of Violent Storms
+                Twister Dashboard: Exploring Four Decades of Violent Storms
                 </h1>
                 <h1 className="h4 d-md-none">
                 Twister Dashboard

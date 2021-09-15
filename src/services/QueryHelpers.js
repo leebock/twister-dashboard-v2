@@ -49,7 +49,11 @@ export function fetchTotalsByYear(minYear, maxYear, extent, callBack)
                 result = result.features
                     .map((feature)=>feature.attributes)
                     .map((attributes)=>({
-                        ...attributes, Year: parseInt(attributes.yr)
+                        ...attributes, 
+                        Year: parseInt(attributes.yr),
+                        totalLoss: parseInt(attributes.yr) < 2016 ? 
+                                    attributes.totalLoss : 
+                                    attributes.totalLoss / 1000000 
                     }));
                 // this last bit adds years for which totals are zero, since 
                 // those years dont't get returned from sql query
@@ -96,7 +100,7 @@ function convert(attributes)
         Date: attributes.date,
         F_Scale: attributes.mag,
         Injuries: attributes.inj,
-        Loss: attributes.loss,
+        Loss: parseInt(attributes.yr) < 2016 ? attributes.loss : attributes.loss / 1000000,
         Starting_Lat: attributes.slat,
         Starting_Long: attributes.slon,
         End_Lat: attributes.elat,
