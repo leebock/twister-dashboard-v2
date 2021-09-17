@@ -18,7 +18,8 @@ export const TMap = ({
     className, 
     twisters, 
     onSelectTwister:reportSelected, 
-    onExtentChange:reportExtent
+    onExtentChange:reportExtent,
+    onFinishLoad:reportLoadFinish
     }) => {
 
     const _layerPaths = React.useRef(new GraphicsLayer({minScale: 10000000}));
@@ -28,6 +29,7 @@ export const TMap = ({
     const _selected = React.useRef(null);
     const _reportSelected = React.useRef(reportSelected);
     const _reportExtent = React.useRef(reportExtent);
+    const _reportLoadFinish = React.useRef(reportLoadFinish);
  
     useEffect(
         () => {
@@ -193,6 +195,7 @@ export const TMap = ({
                     })
                 )
             });
+            _reportLoadFinish.current();
             return () => {};
         },
         [twisters]

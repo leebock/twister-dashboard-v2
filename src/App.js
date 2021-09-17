@@ -5,6 +5,7 @@ import {TMap} from './components/TMap';
 import {Summary} from "./components/Summary";
 import {Details} from './components/Details';
 import { fetchTotalsByYear, fetchTwisters } from './services/QueryHelpers';
+import {Indicator} from './components/Indicator';
 
 function App() {
 
@@ -25,6 +26,8 @@ function App() {
     const [twisters, setTwisters] = useState([]);
     const [selectedTwister, setSelectedTwister] = useState(null);
     const [extentFilter, setExtentFilter] = useState(null);
+    const [fetchInProgress, setFetchInProgress] = useState(false);
+    const [loadInProgress, setLoadInProgress] = useState(false);
 
     const MIN_YEAR = 1980;
     const MAX_YEAR = 2019;
@@ -44,13 +47,22 @@ function App() {
     useEffect(
         () => {
             setSelectedTwister(null);
-            fetchTwisters(activeYear,(result)=>{setTwisters(result);})
+            setFetchInProgress(true);
+            fetchTwisters(
+                activeYear,
+                (result)=>{
+                    setFetchInProgress(false);
+                    setLoadInProgress(true);
+                    setTwisters(result);
+                }
+            )
         },
         [activeYear]
     );
     
     const selectTwister = (twister) => {setSelectedTwister(twister);}
     const processExtent = (extent)=>{setExtentFilter(extent);}
+    const handleFinishLoad = ()=>{setLoadInProgress(false)}
 
     return (
         <div className="container-fluid vh-100 d-flex flex-column">
@@ -85,8 +97,12 @@ function App() {
                 <div>
                     <TMap className="flex-grow-1" 
                         twisters={twisters} 
+                        onFinishLoad={handleFinishLoad}
                         onSelectTwister={selectTwister}
                         onExtentChange={processExtent}/>
+                    <Indicator 
+                        fetchInProgress={fetchInProgress} 
+                        loadInProgress={loadInProgress}/>
                 </div>
                 
             </div>
