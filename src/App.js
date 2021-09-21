@@ -6,6 +6,9 @@ import {Summary} from "./components/Summary";
 import {Details} from './components/Details';
 import { fetchTotalsByYear, fetchTwisters } from './services/QueryHelpers';
 import {Indicator} from './components/Indicator';
+import logo from './resources/esri-logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 function App() {
 
@@ -67,16 +70,24 @@ function App() {
     return (
         <div className="container-fluid vh-100 d-flex flex-column">
         
-            <header className="row mb-3 flex-shrink-0">
-                <h1 className="h3 d-none d-md-block text-truncate pb-2">
+            <header className="d-flex mb-3 flex-shrink-0 justify-content-spacebetween">
+                <a className="ms-2" href="https://www.esri.com" rel="noreferrer" target="_blank">
+                    <img src={logo} alt="Esri logo"/>
+                </a>
+                <h1 className="h4 d-none d-md-block text-truncate ms-3 mb-0 pb-1">
                 Twister Dashboard: Exploring Four Decades of Violent Storms
                 </h1>
-                <h1 className="h4 d-md-none">
+                <h1 className="h5 d-md-none ms-3 mb-0">
                 Twister Dashboard
                 </h1>
-                <h2 className="h6 fw-light d-none d-md-block">
-                Although tornadoes can occur throughout the year, prime time for twisters in the U.S. is spring and early summer. Larger symbols show more violent tornadoes. Zoom into the map to see approximate tornado tracks.
-                </h2>
+                <div className="flex-shrink-0 flex-grow-1 me-2 align-self-center d-flex justify-content-end">
+                    <button onClick={shareFaceBook}>
+                        <FontAwesomeIcon icon={faFacebook} />
+                    </button>
+                    <button onClick={shareTwitter}>
+                        <FontAwesomeIcon icon={faTwitter} />
+                    </button>
+                </div>
             </header>
             
             <div id="main">
@@ -112,6 +123,26 @@ function App() {
             </footer>
 
         </div>
+    );
+}
+
+const shareFaceBook = ()=>{
+    window.open(
+        'http://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location),
+        '',
+        'toolbar=0,status=0,width=626,height=436'
+    );
+}
+const shareTwitter = ()=>{
+    const options = 
+        'text='+encodeURIComponent(document.head.querySelector('meta[property="og:title"]').content)+ 
+        '&url='+encodeURIComponent(window.location)+ 
+        '&via='+encodeURIComponent(document.head.querySelector('meta[name="twitter:site"]').content.replace('@',''))+ 
+        '&hashtags=twisters';
+    window.open(
+        'https://twitter.com/intent/tweet?'+options,
+        'Tweet',
+        'toolbar=0,status=0,width=626,height=436'
     );
 }
 

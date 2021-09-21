@@ -8,6 +8,14 @@ header {
     background-color: #444;
     color: white;
     padding: 10px;
+    margin-right: -12px;
+    margin-left: -12px;
+    overflow: hidden;
+    button {
+        background: none;
+        border: none;
+        color: white;
+    }
 }
 
 div#main {
