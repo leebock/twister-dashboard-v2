@@ -9,6 +9,8 @@ import {Indicator} from './components/Indicator';
 import logo from './resources/esri-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { Directions } from './components/Directions';
 
 function App() {
 
@@ -31,6 +33,7 @@ function App() {
     const [extentFilter, setExtentFilter] = useState(null);
     const [fetchInProgress, setFetchInProgress] = useState(false);
     const [loadInProgress, setLoadInProgress] = useState(false);
+    const [showDirections, setShowDirections] = useState(false);
 
     const MIN_YEAR = 1980;
     const MAX_YEAR = 2019;
@@ -65,7 +68,8 @@ function App() {
     
     const selectTwister = (twister) => {setSelectedTwister(twister);}
     const processExtent = (extent)=>{setExtentFilter(extent);}
-    const handleFinishLoad = ()=>{setLoadInProgress(false)}
+    const handleFinishLoad = ()=>{setLoadInProgress(false);}
+    const toggleDirections = ()=>{setShowDirections(!showDirections);}
 
     return (
         <div className="container-fluid vh-100 d-flex flex-column">
@@ -86,6 +90,14 @@ function App() {
                     </button>
                     <button onClick={shareTwitter}>
                         <FontAwesomeIcon icon={faTwitter} />
+                    </button>
+                    <button className="d-none d-md-block" 
+                            onClick={toggleDirections}>
+                                How to use this app
+                    </button>
+                    <button className="d-md-none" 
+                            onClick={toggleDirections}>
+                            <FontAwesomeIcon icon={faInfoCircle} />
                     </button>
                 </div>
             </header>
@@ -115,6 +127,13 @@ function App() {
                         fetchInProgress={fetchInProgress} 
                         loadInProgress={loadInProgress}/>
                 </div>
+
+                {
+                    showDirections && 
+                    <Directions 
+                        className="position-absolute" 
+                        onDismiss={()=>setShowDirections(false)}/>
+                }
                 
             </div>
             
