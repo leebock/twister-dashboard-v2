@@ -12,6 +12,25 @@ header {
     margin-left: -12px;
     overflow: hidden;
     align-items: center;
+    & > a {
+        & > img {
+            height: 25px;
+        }
+    }
+    & > h1:nth-of-type(1) {
+        font-size: calc(1.275rem + .3vw);
+        &:before {
+            content: "Twister Dashboard: Exploring Four Decades of Violent Storms";
+        }    
+        @media (max-width: 768px) {
+            font-size: 1.25rem;
+        }
+        @media (max-width: 450px) {
+            &:before {
+                content: "Twister Dashboard";
+            }        
+        }
+    }
     & button {
         background: none;
         border: none;

@@ -78,12 +78,7 @@ function App() {
                 <a className="ms-2" href="https://www.esri.com" rel="noreferrer" target="_blank">
                     <img src={logo} alt="Esri logo"/>
                 </a>
-                <h1 className="h4 d-none d-md-block text-truncate ms-3 mb-0 pb-1">
-                Twister Dashboard: Exploring Four Decades of Violent Storms
-                </h1>
-                <h1 className="h5 d-md-none ms-3 mb-0">
-                Twister Dashboard
-                </h1>
+                <h1 className="text-truncate ms-3 mb-0 pb-1" alt="Twister Dashboard: Exploring Four Decades of Violent Storms"> </h1>
                 <div className="flex-shrink-0 flex-grow-1 me-2 align-self-center d-flex justify-content-end">
                     <button onClick={shareFaceBook}>
                         <FontAwesomeIcon icon={faFacebook} />
