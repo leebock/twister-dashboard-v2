@@ -10,6 +10,7 @@ export const Details = ({className, twister}) => {
                 <ul>
                     <li>
                         <h3 className="de-emphasized">{getDisplayDate(twister.Date)}</h3>
+                        <hr/>
                         <span className="caption">Date</span>
                     </li>
                     <li>

@@ -7,6 +7,7 @@ export const Summary = ({className, year, summary}) => {
                     <ul>
                         <li>
                             <h3>{year}</h3>
+                            <hr/>
                             <span className="caption">Year</span>
                         </li>
                         <li>
